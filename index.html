@@ -10,13 +10,16 @@
     </header>
    
 
+  
+   
+ Search: <input ng-model="searchText">
+ <table id="searchTextResults">
    <ul ng-controller="myCtrl">
-       <code>{{results | json }}</code>
-     <li ng-repeat="result in results">
+      
+     <li ng-repeat="result in results | filter:{title.$t:searchText}">
          {{result.title.$t}}
      </li>
      
-   </ul>
       <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
       <script type="text/javascript" src="js/app.js"></script>
    
@@ -25,7 +28,7 @@
 
 </html>
 
-<!--/*w workspace git add -A
+<!--/*w workspace git add -A    <code>{{results | json }}</code>
 git commit
 ctrl shift X
 Y
