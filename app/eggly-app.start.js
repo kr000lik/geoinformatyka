@@ -1,6 +1,6 @@
-angular.module('Eggly', [
+angular.module('Eggly', ["firebase"
 
-])
+]).constant('FIREBASE_URI','luminous-torch-9705.firebaseio.com')
     .controller('MainCtrl', function ($scope) {
         $scope.categories = [
             {"id": 0, "name": "Development"},
@@ -78,7 +78,20 @@ angular.module('Eggly', [
             $scope.editedBookmark = null;
             $scope.isEditing = false;
         }
-
+         function removeBookmark(bookmark){
+      
+        var index = _.findIndex($scope.bookmarks, function (b) {
+                return b.id == bookmark.id
+            });
+             
+        
+              if(index > -1){
+              $scope.bookmarks.splice(index,1);
+              }
+      
+         }
+         
+        $scope.removeBookmark = removeBookmark; 
         $scope.createBookmark = createBookmark;
         $scope.updateBookmark = updateBookmark;
 
@@ -117,23 +130,12 @@ angular.module('Eggly', [
             $scope.editedBookmark = null;
         }
 
-         function removeBookmark(bookmark){
-      
-        var index = _.findIndex($scope.bookmarks, function (b) {
-                return b.id == bookmark.id
-         });
         
-        
-        if(index > -1){
-           $scope.bookmarks.splice(index,1);
-        }
-      
-         }
 
 
 
        
-        $scope.removeBookmark = removeBookmark; 
+       
         $scope.startEditing = startEditing;
         $scope.cancelEditing = cancelEditing;
         $scope.shouldShowEditing = shouldShowEditing;
