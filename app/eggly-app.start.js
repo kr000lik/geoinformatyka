@@ -1,4 +1,4 @@
-angular.module('Eggly', ["firebase"
+angular.module('Eggly', ['firebase'
 
 ]).constant('FIREBASE_URI','luminous-torch-9705.firebaseio.com')
    .controller('MainCtrl', function ($scope,ItemFactory) {

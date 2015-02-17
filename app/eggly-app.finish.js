@@ -1,7 +1,7 @@
-angular.module('Eggly', [
+angular.module('Eggly', ['firebase'
 
-])
-  .controller('MainCtrl', function ($scope) {
+]).constant('FIREBASE_URI','luminous-torch-9705.firebaseio.com')
+  .controller('MainCtrl', function ($scope,ItemFactory) {
       $scope.categories = [
           {"id": 0, "name": "Development"},
           {"id": 1, "name": "Design"},
