@@ -38,5 +38,11 @@ angular.module('bookmarks', [
     };
 
     $scope.deleteBookmark = bookmarks.deleteBookmark;
+    
+    
+    
+    
+    
+    
   })
 ;
