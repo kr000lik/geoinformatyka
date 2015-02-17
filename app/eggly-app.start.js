@@ -1,7 +1,7 @@
 angular.module('Eggly', ["firebase"
 
 ]).constant('FIREBASE_URI','luminous-torch-9705.firebaseio.com')
-    .controller('MainCtrl', function ($scope) {
+   .controller('MainCtrl', function ($scope,ItemFactory) {
         $scope.categories = [
             {"id": 0, "name": "Development"},
             {"id": 1, "name": "Design"},
@@ -140,4 +140,44 @@ angular.module('Eggly', ["firebase"
         $scope.cancelEditing = cancelEditing;
         $scope.shouldShowEditing = shouldShowEditing;
     })
-;
+.factory('ItemFactory',function($firebase,FIREBASE_URI){
+    var ref = new Firebase(FIREBASE_URI);
+    ref = ref.child('items');
+	var refCategories = ref.child('categories');
+	var refBookmarks = ref.child('bookmarks');
+    
+    var syncCategories = $firebase(refCategories);
+    var categories = syncCategories.$asArray();
+	
+	var syncBookmakrs = $firebase(refBookmarks);
+    var bookmarks = syncBookmakrs.$asArray();
+    
+    var getCategories = function () {
+        return categories;
+    }
+	
+	var getBookmarks = function () {
+        return bookmarks;
+    }
+    
+    var addBookmark = function(bookmark){
+        bookmarks.$add(bookmark);
+    }
+    
+    var removeBookmark = function(bookmark){
+        bookmarks.$remove(bookmark);
+    }
+    
+    var updateBookmark = function(bookmark){
+        bookmarks.$save(bookmark);
+    }
+    
+    return{
+        getCategories: getCategories,
+		getBookmarks: getBookmarks,
+        addBookmark: addBookmark,
+        removeBookmark: removeBookmark,
+        updateBookmark: updateBookmark
+    }
+    
+});
