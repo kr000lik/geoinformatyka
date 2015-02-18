@@ -1,17 +1,41 @@
-angular.module('Eggly', ['firebase'
+angular.module('Eggly', ['firebase', 'ui.router'
 
 ]).constant('FIREBASE_URI','luminous-torch-9705.firebaseio.com')
-   .controller('MainCtrl', function ($scope,ItemFactory) {
+.config(function($stateProvider, $urlRouterProvider){
+      $urlRouterProvider.otherwise("/partials/categories")
+       $stateProvider
+        .state('1', {
+            url: "/partials/categories",
+            templateUrl: "partials/categories.html"
+        
+           
+        })
+       //  .state(' {{category.name}}', {
+         //   url: "/partials/add",
+           // templateUrl: "partials/add.html"
+        //})
+       
+   
+   
+   
+   
+   
+   
+    })
+
+
+
+
+.controller('MainCtrl', function ($scope,ItemFactory) {
     
      $scope.categories = ItemFactory.getCategories();
-     $scope.categories = [
-            {"id": 0, "name": "Development"},
-            {"id": 1, "name": "Design"},
-            {"id": 2, "name": "Exercise"},
-            {"id": 3, "name": "Humor"}
-        ];
-
-      $scope.bookmarks = ItemFactory.getBookmarks();
+           $scope.categories = [
+          {"id": 0, "name": "Development"},
+          {"id": 1, "name": "Design"},
+          {"id": 2, "name": "Exercise"},
+          {"id": 3, "name": "Humor"}
+      ];
+     $scope.bookmarks = ItemFactory.getBookmarks();
 
         $scope.isCreating = false;
         $scope.isEditing = false;
@@ -54,13 +78,14 @@ angular.module('Eggly', ['firebase'
         //-------------------------------------------------------------------------------------------------
         // CRUD
         //-------------------------------------------------------------------------------------------------
-            function createBookmark(bookmark) {
-            bookmark.id = $scope.bookmarks.length;
+        function createBookmark(bookmark) {
+		    bookmark.id = $scope.bookmarks.length;
 			ItemFactory.addBookmark(bookmark);
             resetCreateForm();
         }
-        function updateBookmark(bookmark) {
-            ItemFactory.updateBookmark(bookmark);
+       function updateBookmark(bookmark) {
+			$scope.bookmarks[bookmark.id] = bookmark;
+			ItemFactory.updateBookmark(bookmark);
             $scope.editedBookmark = null;
             $scope.isEditing = false;
         }
@@ -148,7 +173,9 @@ angular.module('Eggly', ['firebase'
     }
     
     var updateBookmark = function(bookmark){
-        bookmarks.$save(bookmark);
+        var b = bookmarks.$getRecord(bookmark.$id);
+        b = bookmark;
+        bookmarks.$save(b);
     }
     
     return{

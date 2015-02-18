@@ -1,0 +1,10 @@
+ <div class="col-sm-3 col-md-2 sidebar">
+                    <a ng-click="setCurrentCategory(null)"><img class="logo" src="http://img4.wikia.nocookie.net/__cb20120124042116/elderscrolls/images/e/ec/Ok-icon.png"></a>
+                    <ul class="nav nav-sidebar">
+                        <li ng-repeat="category in categories" ng-class="{'active':isCurrentCategory(category)}">
+                            <a ng-click="setCurrentCategory(category)">
+                                {{category.name}}
+                            </a>
+                        </li>
+                    </ul>
+               </div>

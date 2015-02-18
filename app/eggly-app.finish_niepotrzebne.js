@@ -1,6 +1,18 @@
-angular.module('Eggly', ['firebase'
+        //niepotrzebne 
+
+angular.module('Eggly', ['firebase', 'ui.router'
 
 ]).constant('FIREBASE_URI','luminous-torch-9705.firebaseio.com')
+.config(function($stateProvider, $urlRouterProvider){
+      $urlRouterProvider.otherwise("/state1")
+       $stateProvider
+        .state('state1', {
+            url: "/state1",
+            templateUrl: "state1.html"
+        })
+       
+    })
+
   .controller('MainCtrl', function ($scope,ItemFactory) {
       $scope.categories = [
           {"id": 0, "name": "Development"},
