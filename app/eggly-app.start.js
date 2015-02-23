@@ -1,6 +1,7 @@
 angular.module('Eggly', ['firebase', 'ui.router'
 
 ]).constant('FIREBASE_URI','luminous-torch-9705.firebaseio.com')
+
 .config(function($stateProvider, $urlRouterProvider){
       $urlRouterProvider.otherwise("/partials/categories")
        $stateProvider
@@ -69,7 +70,7 @@ angular.module('Eggly', ['firebase', 'ui.router'
         }
 
         //-------------------------------------------------------------------------------------------------
-        // CRUD
+        // CRUD TUTUTUTUTUTUTUTUTUTUTUTUTUTUTUTUTUTUTUTUTUTUTU
         //-------------------------------------------------------------------------------------------------
         function createBookmark(bookmark) {
 		    bookmark.id = $scope.bookmarks.length;
