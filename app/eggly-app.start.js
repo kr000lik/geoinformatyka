@@ -14,14 +14,7 @@ angular.module('Eggly', ['firebase', 'ui.router'
          //   url: "/partials/add",
            // templateUrl: "partials/add.html"
         //})
-       
-   
-   
-   
-   
-   
-   
-    })
+     })
 
 
 
@@ -83,7 +76,7 @@ angular.module('Eggly', ['firebase', 'ui.router'
 			ItemFactory.addBookmark(bookmark);
             resetCreateForm();
         }
-       function updateBookmark(bookmark) {
+        function updateBookmark(bookmark) {
 			$scope.bookmarks[bookmark.id] = bookmark;
 			ItemFactory.updateBookmark(bookmark);
             $scope.editedBookmark = null;
